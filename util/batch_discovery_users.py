@@ -4,10 +4,16 @@ def main():
     usernames = []
 
     for line in fileinput.input():
-        if not line.strip():
+        username = line.strip()
+
+        if not username:
             continue
 
-        usernames.append(line.strip())
+        assert '\n' not in username, username
+        assert '\r' not in username, username
+        assert ',' not in username, username
+
+        usernames.append(username)
 
         if len(usernames) >= 10:
             print('usernames:{}'.format(','.join(usernames)))
